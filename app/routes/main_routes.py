@@ -12,3 +12,9 @@ def index():
     
     #renderizamos a un html y pasamos los datos
     return render_template('index.html', vacantes=vacantes)
+
+@main_bp.route('/acerca')
+def acerca():
+    return render_template("acerca.html")
+
+
