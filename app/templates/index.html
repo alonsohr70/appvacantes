@@ -8,10 +8,10 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
     <title>Departamento de Recursos Humanos - My Company</title>
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS A TRAVES DE JINJA2-->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/justified-nav.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/justified-nav.css') }}" rel="stylesheet">
 
   </head>
 
@@ -58,24 +58,20 @@
 
      <!-- Example row of columns -->
       <div class="row">
+        <!-- usando Jinja2 para presentar registros -->
+        {% for vacante in vacantes %}
         <div class="col-lg-4">
-          <h2>Safari bug warning!</h2>
-          <p class="text-danger text-justify">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
-          <p class="text-justify">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <h2>{{ vacante.nombre }}></h2>
+            <p class="text-danger text-justify"> {{ vacante.descripcion[:150]}} </p>
+            <p class="text-justify">{{ vacante.detalle[:150]}} </p>
           <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
         </div>
-        <div class="col-lg-4">
-          <h2>Heading</h2>
-          <p class="text-danger text-justify">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
-          <p class="text-justify">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        {% else %}
+        <div class="col-lg-12">
+            <p>No hay vacantes disponibles por el momento</p>
+
         </div>
-        <div class="col-lg-4">
-          <h2>Heading</h2>
-          <p class="text-danger text-justify">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
-          <p class="text-justify">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-        </div>
+        {% endfor %}
       </div>
 
       <!-- Site footer -->
